@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Lightning, Phone, Envelope, MapPin } from '@phosphor-icons/react';
-import { BRAND, NAV_LINKS, FOOTER } from '../config/siteConfig';
+import { BRAND, NAV_LINKS, FOOTER, AGENCY } from '../config/siteConfig';
 
 export default function Footer() {
   return (
@@ -88,11 +88,29 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-zinc-500 text-[13px]">
-          <p>&copy; {new Date().getFullYear()} {BRAND.name}. All Rights Reserved.</p>
-          <div className="flex gap-5">
-            <a href="#" className="hover:text-zinc-300 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">Terms of Service</a>
+        <div className="border-t border-white/[0.06] pt-6 space-y-3">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-zinc-500 text-[13px]">
+            <p>&copy; {new Date().getFullYear()} {BRAND.name}. All Rights Reserved.</p>
+            <div className="flex gap-5">
+              <a href="#" className="hover:text-zinc-300 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-zinc-300 transition-colors">Terms of Service</a>
+            </div>
+          </div>
+
+          {/* Agency Credit — DO NOT REMOVE */}
+          <div className="text-center pt-3 border-t border-white/[0.04]">
+            <p className="text-zinc-600 text-[12px] tracking-wide">
+              {AGENCY.credit}{' '}
+              <a
+                href={AGENCY.url}
+                target="_blank"
+                rel="noopener"
+                className="text-zinc-400 hover:text-brand-400 transition-colors duration-200 font-semibold"
+                id="agency-credit-link"
+              >
+                {AGENCY.name}
+              </a>
+            </p>
           </div>
         </div>
       </div>

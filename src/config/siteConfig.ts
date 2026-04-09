@@ -428,3 +428,11 @@ export const SEO = {
   description: BRAND.description,
   ogImage: HERO.image,
 };
+
+// ─── AGENCY (DO NOT CHANGE PER CLIENT) ──────────────────────────────
+// This section is for YOUR agency branding. It persists across all clones.
+export const AGENCY = {
+  name: "Katana Intelligence",
+  url: "https://katanaintelligence.com",     // Your agency website (backlink)
+  credit: "Designed & Developed by",          // Credit line prefix
+};
