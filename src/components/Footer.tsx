@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Lightning, Phone, Envelope, MapPin } from '@phosphor-icons/react';
+import { BRAND, NAV_LINKS, FOOTER } from '../config/siteConfig';
 
 export default function Footer() {
   return (
@@ -13,25 +14,25 @@ export default function Footer() {
                 <Lightning weight="fill" className="w-4 h-4 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[17px] font-bold leading-tight">ProElectric</span>
-                <span className="text-[10px] text-zinc-500 tracking-wide uppercase font-medium">Licensed & Insured</span>
+                <span className="text-[17px] font-bold leading-tight">{BRAND.name}</span>
+                <span className="text-[10px] text-zinc-500 tracking-wide uppercase font-medium">{BRAND.tagline}</span>
               </div>
             </Link>
             <p className="text-zinc-500 text-sm max-w-xs mb-5 leading-relaxed">
-              Professional electrical services for residential and commercial properties. Licensed, insured, and trusted by thousands.
+              {BRAND.description}
             </p>
             <div className="flex flex-col gap-2.5 text-sm text-zinc-400">
-              <a href="tel:+16133017913" className="flex items-center gap-2 hover:text-brand-400 transition-colors" id="footer-phone">
+              <a href={`tel:${BRAND.phoneRaw}`} className="flex items-center gap-2 hover:text-brand-400 transition-colors" id="footer-phone">
                 <Phone weight="fill" className="w-4 h-4 text-brand-500" />
-                (613) 301-7913
+                {BRAND.phone}
               </a>
-              <a href="mailto:info@proelectric.com" className="flex items-center gap-2 hover:text-brand-400 transition-colors" id="footer-email">
+              <a href={`mailto:${BRAND.email}`} className="flex items-center gap-2 hover:text-brand-400 transition-colors" id="footer-email">
                 <Envelope weight="fill" className="w-4 h-4 text-brand-500" />
-                info@proelectric.com
+                {BRAND.email}
               </a>
               <div className="flex items-center gap-2">
                 <MapPin weight="fill" className="w-4 h-4 text-brand-500" />
-                Ottawa, ON, Canada
+                {BRAND.address}
               </div>
             </div>
           </div>
@@ -40,13 +41,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-[15px] mb-5">Quick Links</h4>
             <ul className="space-y-2.5 text-zinc-400 text-sm">
-              {[
-                { label: 'Home', path: '/' },
-                { label: 'Services', path: '/services' },
-                { label: 'About Us', path: '/about' },
-                { label: 'Reviews', path: '/reviews' },
-                { label: 'Contact Us', path: '/contact' },
-              ].map((link) => (
+              {NAV_LINKS.map((link) => (
                 <li key={link.path}>
                   <Link to={link.path} className="hover:text-zinc-200 transition-colors duration-200">
                     {link.label}
@@ -60,14 +55,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-[15px] mb-5">Our Services</h4>
             <ul className="space-y-2.5 text-zinc-400 text-sm">
-              {[
-                'Residential Electrical',
-                'Commercial Services',
-                'Panel Upgrades',
-                'Lighting Installation',
-                'EV Charger Installation',
-                'Emergency Repairs',
-              ].map((service) => (
+              {FOOTER.servicesList.map((service) => (
                 <li key={service}>
                   <Link to="/services" className="hover:text-zinc-200 transition-colors duration-200">
                     {service}
@@ -81,20 +69,14 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-[15px] mb-5">Service Hours</h4>
             <ul className="space-y-2.5 text-zinc-400 text-sm mb-6">
-              <li className="flex justify-between">
-                <span>Monday – Friday</span>
-                <span className="text-zinc-200 font-medium">7AM – 8PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Saturday</span>
-                <span className="text-zinc-200 font-medium">8AM – 5PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Sunday</span>
-                <span className="text-zinc-200 font-medium">Emergency Only</span>
-              </li>
+              {FOOTER.hours.map((h) => (
+                <li key={h.day} className="flex justify-between">
+                  <span>{h.day}</span>
+                  <span className="text-zinc-200 font-medium">{h.time}</span>
+                </li>
+              ))}
               <li className="pt-2 border-t border-white/[0.06]">
-                <span className="text-brand-400 text-[13px] font-medium">24/7 Emergency Service Available</span>
+                <span className="text-brand-400 text-[13px] font-medium">{FOOTER.emergencyNote}</span>
               </li>
             </ul>
 
@@ -107,7 +89,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-zinc-500 text-[13px]">
-          <p>&copy; {new Date().getFullYear()} ProElectric. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {BRAND.name}. All Rights Reserved.</p>
           <div className="flex gap-5">
             <a href="#" className="hover:text-zinc-300 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-zinc-300 transition-colors">Terms of Service</a>

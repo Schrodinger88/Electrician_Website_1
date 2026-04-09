@@ -1,6 +1,10 @@
 import { Lightning, Phone, Clock, ShieldCheck } from '@phosphor-icons/react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
+import { BRAND, EMERGENCY } from '../config/siteConfig';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const iconMap: Record<string, any> = { Clock, Lightning, Phone, ShieldCheck };
 
 export default function EmergencyBanner() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -9,7 +13,6 @@ export default function EmergencyBanner() {
     offset: ['start end', 'end start'],
   });
 
-  // Parallax transforms
   const bgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
   const glowScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.9]);
   const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.4]);
@@ -26,7 +29,7 @@ export default function EmergencyBanner() {
               viewport={{ once: true }}
             >
               <Lightning weight="fill" className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-[13px] text-amber-400 font-medium">Emergency Service Available</span>
+              <span className="text-[13px] text-amber-400 font-medium">{EMERGENCY.badge}</span>
             </motion.div>
 
             <motion.h2
@@ -36,8 +39,8 @@ export default function EmergencyBanner() {
               viewport={{ once: true }}
               transition={{ delay: 0.08 }}
             >
-              Electrical Emergency?<br />
-              <span className="text-brand-400">We're Available 24/7</span>
+              {EMERGENCY.title}<br />
+              <span className="text-brand-400">{EMERGENCY.titleAccent}</span>
             </motion.h2>
 
             <motion.p
@@ -47,11 +50,11 @@ export default function EmergencyBanner() {
               viewport={{ once: true }}
               transition={{ delay: 0.16 }}
             >
-              Power outages, sparking outlets, or electrical failures don't wait for business hours. Neither do we. Our emergency response team is ready to help you day or night.
+              {EMERGENCY.subtitle}
             </motion.p>
 
             <motion.a
-              href="tel:+16133017913"
+              href={`tel:${BRAND.phoneRaw}`}
               id="emergency-call-btn"
               className="inline-flex items-center gap-3 bg-brand-500 text-white px-7 py-4 rounded-xl font-semibold hover:bg-brand-600 transition-colors duration-200 group"
               initial={{ opacity: 0, y: 12 }}
@@ -63,21 +66,16 @@ export default function EmergencyBanner() {
             >
               <Phone weight="fill" className="w-5 h-5" />
               <div className="flex flex-col items-start">
-                <span className="text-[11px] text-white/60 font-medium leading-tight">Emergency Hotline</span>
-                <span className="text-lg font-bold tracking-tight leading-tight">(613) 301-7913</span>
+                <span className="text-[11px] text-white/60 font-medium leading-tight">{EMERGENCY.hotlineLabel}</span>
+                <span className="text-lg font-bold tracking-tight leading-tight">{BRAND.phone}</span>
               </div>
             </motion.a>
           </div>
 
           {/* Features Grid */}
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {[
-              { icon: Clock, label: '24/7 Availability', desc: 'Around the clock service' },
-              { icon: Lightning, label: 'Fast Response', desc: 'Avg. 45min arrival time' },
-              { icon: Phone, label: 'Direct Line', desc: 'Speak to a real electrician' },
-              { icon: ShieldCheck, label: 'Fair Pricing', desc: 'No surprise emergency fees' },
-            ].map((feature, index) => {
-              const Icon = feature.icon;
+            {EMERGENCY.features.map((feature, index) => {
+              const Icon = iconMap[feature.iconName] || Lightning;
               return (
                 <motion.div
                   key={index}
@@ -87,9 +85,7 @@ export default function EmergencyBanner() {
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ delay: 0.1 + index * 0.08, duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
                 >
-                  <div
-                    className="w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center mb-3"
-                  >
+                  <div className="w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center mb-3">
                     <Icon weight="duotone" className="w-5 h-5 text-brand-400" />
                   </div>
                   <h3 className="text-white font-semibold text-[15px] mb-0.5">{feature.label}</h3>
@@ -109,7 +105,6 @@ export default function EmergencyBanner() {
         }} />
       </motion.div>
 
-      {/* Parallax glow orbs */}
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/[0.06] rounded-full blur-[120px] pointer-events-none"
         style={{ scale: glowScale, opacity: glowOpacity }}

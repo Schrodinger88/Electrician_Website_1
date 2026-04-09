@@ -2,16 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Lightning, List, X } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'motion/react';
-
-const navLinks = [
-  { label: 'Home', path: '/' },
-  { label: 'Services', path: '/services' },
-  { label: 'About', path: '/about' },
-  { label: 'Reviews', path: '/reviews' },
-  { label: 'Service Area', path: '/service-area' },
-  { label: 'FAQ', path: '/faq' },
-  { label: 'Contact', path: '/contact' },
-];
+import { BRAND, NAV_LINKS } from '../config/siteConfig';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -57,14 +48,14 @@ export default function Navbar() {
                 <Lightning weight="fill" className="w-5 h-5 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[17px] font-bold text-white tracking-tight leading-tight">ProElectric</span>
-                <span className="text-[10px] text-zinc-500 tracking-wide uppercase font-medium">Licensed & Insured</span>
+                <span className="text-[17px] font-bold text-white tracking-tight leading-tight">{BRAND.name}</span>
+                <span className="text-[10px] text-zinc-500 tracking-wide uppercase font-medium">{BRAND.tagline}</span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-0.5">
-              {navLinks.map((item) => {
+              {NAV_LINKS.map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
                   <Link
@@ -85,12 +76,12 @@ export default function Navbar() {
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-2">
               <a
-                href="tel:+16133017913"
+                href={`tel:${BRAND.phoneRaw}`}
                 id="nav-call-btn"
                 className="hidden sm:flex items-center gap-2 bg-brand-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-brand-600 transition-colors duration-200 text-[13px]"
               >
                 <Phone weight="fill" className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">(613) 301-7913</span>
+                <span className="hidden md:inline">{BRAND.phone}</span>
                 <span className="md:hidden">Call</span>
               </a>
 
@@ -138,7 +129,7 @@ export default function Navbar() {
               transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
             >
               <div className="px-5 py-4 space-y-0.5">
-                {navLinks.map((item, index) => {
+                {NAV_LINKS.map((item, index) => {
                   const isActive = location.pathname === item.path;
                   return (
                     <motion.div
@@ -164,12 +155,12 @@ export default function Navbar() {
                 {/* Mobile CTA */}
                 <div className="pt-3 mt-2 border-t border-white/[0.06]">
                   <a
-                    href="tel:+16133017913"
+                    href={`tel:${BRAND.phoneRaw}`}
                     className="flex items-center justify-center gap-2.5 bg-brand-500 text-white px-6 py-3.5 rounded-lg font-semibold text-[15px] w-full hover:bg-brand-600 transition-colors"
                     id="mobile-call-btn"
                   >
                     <Phone weight="fill" className="w-4 h-4" />
-                    (613) 301-7913
+                    {BRAND.phone}
                   </a>
                 </div>
               </div>

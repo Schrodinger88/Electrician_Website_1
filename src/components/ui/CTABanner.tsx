@@ -1,6 +1,7 @@
 import { Phone } from '@phosphor-icons/react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { BRAND, DEFAULT_CTA } from '../../config/siteConfig';
 
 interface CTABannerProps {
   title?: string;
@@ -8,8 +9,8 @@ interface CTABannerProps {
 }
 
 export default function CTABanner({
-  title = "Ready to Get Started?",
-  subtitle = "Book a certified electrician today for fast, safe, and reliable service at your home or business."
+  title = DEFAULT_CTA.title,
+  subtitle = DEFAULT_CTA.subtitle,
 }: CTABannerProps) {
   return (
     <section className="py-16 sm:py-20 bg-white" id="cta-section">
@@ -27,12 +28,12 @@ export default function CTABanner({
 
             <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3">
               <a
-                href="tel:+16133017913"
+                href={`tel:${BRAND.phoneRaw}`}
                 id="cta-call-btn"
                 className="flex items-center justify-center gap-2.5 bg-brand-500 text-white px-6 py-3.5 rounded-lg font-semibold text-[15px] hover:bg-brand-600 transition-colors duration-200"
               >
                 <Phone weight="fill" className="w-4 h-4" />
-                (613) 301-7913
+                {BRAND.phone}
               </a>
               <Link
                 to="/contact"
@@ -45,7 +46,6 @@ export default function CTABanner({
             </div>
           </div>
 
-          {/* Subtle ambient glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-brand-500/[0.06] rounded-full blur-[100px] pointer-events-none" />
         </motion.div>
       </div>

@@ -1,6 +1,7 @@
 import { Phone, Shield, Clock, ArrowRight, Star } from '@phosphor-icons/react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { BRAND, HERO } from '../config/siteConfig';
 
 export default function Hero() {
   return (
@@ -22,23 +23,23 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <Shield weight="fill" className="w-4 h-4 text-brand-400 drop-shadow-[0_0_8px_rgba(76,185,122,0.8)]" />
-              <span className="text-[12px] text-zinc-300 font-bold tracking-widest uppercase">Licensed & Insured</span>
+              <span className="text-[12px] text-zinc-300 font-bold tracking-widest uppercase">{HERO.badge}</span>
             </motion.div>
 
             <h1 className="text-5xl sm:text-6xl md:text-[68px] lg:text-[76px] font-bold tracking-tight leading-[1] text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/60">
-              Expertise that <br className="hidden sm:block" />
-              powers your <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-brand-500 drop-shadow-sm">Property</span>
+              {HERO.titleLine1} <br className="hidden sm:block" />
+              {HERO.titleLine2} <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-brand-500 drop-shadow-sm">{HERO.titleAccent}</span>
             </h1>
 
             <p className="text-zinc-400 text-lg sm:text-[19px] leading-relaxed max-w-[48ch] font-light">
-              Premium electrical solutions for residential and commercial properties. From modern panel upgrades to rapid emergency repairs, we deliver safe, reliable service.
+              {HERO.subtitle}
             </p>
 
             {/* Primary CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <motion.a
-                href="tel:+16133017913"
+                href={`tel:${BRAND.phoneRaw}`}
                 id="hero-call-btn"
                 className="relative flex items-center justify-center gap-3 bg-brand-500 text-white px-8 py-4.5 rounded-2xl font-semibold shadow-[0_0_40px_rgba(42,157,94,0.3)] hover:shadow-[0_0_60px_rgba(42,157,94,0.5)] transition-all duration-300 overflow-hidden group"
                 whileHover={{ y: -2 }}
@@ -46,7 +47,7 @@ export default function Hero() {
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
                 <Phone weight="fill" className="w-5 h-5 relative z-10 drop-shadow-md" />
-                <span className="text-[17px] relative z-10 drop-shadow-sm">(613) 301-7913</span>
+                <span className="text-[17px] relative z-10 drop-shadow-sm">{BRAND.phone}</span>
               </motion.a>
 
               <Link
@@ -65,13 +66,13 @@ export default function Hero() {
                 <div className="p-2.5 rounded-xl bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors border border-white/[0.05]">
                   <Clock weight="duotone" className="w-5 h-5 text-brand-400" />
                 </div>
-                <span className="text-[14px] font-medium">24/7 Emergency Service</span>
+                <span className="text-[14px] font-medium">{HERO.trustIndicators[0].label}</span>
               </div>
               <div className="flex items-center gap-3 text-zinc-400 group cursor-default">
                 <div className="p-2.5 rounded-xl bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors border border-white/[0.05]">
                   <Shield weight="duotone" className="w-5 h-5 text-brand-400" />
                 </div>
-                <span className="text-[14px] font-medium">17+ Years Experience</span>
+                <span className="text-[14px] font-medium">{HERO.trustIndicators[1].label}</span>
               </div>
             </div>
           </motion.div>
@@ -85,8 +86,8 @@ export default function Hero() {
           >
             <div className="absolute inset-x-8 top-0 bottom-12 rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform-gpu z-10">
               <img
-                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=1200&fit=crop"
-                alt="Certified electrician"
+                src={HERO.image}
+                alt={HERO.imageAlt}
                 className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[2000ms] ease-out"
                 loading="eager"
               />
@@ -104,15 +105,15 @@ export default function Hero() {
               <div className="flex gap-1 text-brand-400 mb-2">
                 {[1, 2, 3, 4, 5].map(i => <Star key={i} weight="fill" className="w-4 h-4 drop-shadow-[0_0_5px_rgba(76,185,122,0.5)]" />)}
               </div>
-              <div className="text-3xl font-bold text-white mb-0.5 tracking-tight">4.9/5</div>
-              <div className="text-[14px] text-zinc-400 font-medium">Over 400+ Verified Reviews</div>
+              <div className="text-3xl font-bold text-white mb-0.5 tracking-tight">{HERO.reviewCard.rating}</div>
+              <div className="text-[14px] text-zinc-400 font-medium">Over {HERO.reviewCard.reviewCount} {HERO.reviewCard.label}</div>
               <div className="mt-4 pt-4 border-t border-white/[0.08] flex items-center gap-3">
                 <div className="flex -space-x-2">
                   <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-surface-900 shadow-md"></div>
                   <div className="w-8 h-8 rounded-full bg-zinc-700 border-2 border-surface-900 shadow-md"></div>
                   <div className="w-8 h-8 rounded-full bg-zinc-600 border-2 border-surface-900 shadow-md"></div>
                 </div>
-                <div className="text-xs text-zinc-300 font-medium">Trusted locally</div>
+                <div className="text-xs text-zinc-300 font-medium">{HERO.reviewCard.communityLabel}</div>
               </div>
             </motion.div>
           </motion.div>

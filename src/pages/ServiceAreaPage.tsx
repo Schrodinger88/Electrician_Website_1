@@ -2,41 +2,21 @@ import PageHero from '../components/ui/PageHero';
 import CTABanner from '../components/ui/CTABanner';
 import { motion } from 'motion/react';
 import { MapPin, CheckCircle } from '@phosphor-icons/react';
+import { BRAND, SERVICE_AREA } from '../config/siteConfig';
 
 export default function ServiceAreaPage() {
-  const areas = [
-    {
-      region: "Central Ottawa",
-      cities: ["Downtown Ottawa", "Centretown", "The Glebe", "Old Ottawa South", "Sandy Hill", "Byward Market"]
-    },
-    {
-      region: "East Ottawa",
-      cities: ["Orleans", "Gloucester", "Beacon Hill", "Blackburn Hamlet", "Cumberland", "Navan"]
-    },
-    {
-      region: "West Ottawa",
-      cities: ["Kanata", "Stittsville", "Barrhaven", "Nepean", "Westboro", "Bell's Corners"]
-    },
-    {
-      region: "South Ottawa",
-      cities: ["Riverside South", "Manotick", "Greely", "Metcalfe", "Osgoode", "Richmond"]
-    },
-  ];
-
   return (
     <>
       <PageHero
-        title="Our Service"
-        titleAccent="Area"
-        subtitle="We proudly serve the greater Ottawa area and surrounding communities. Check if we cover your neighborhood."
-        breadcrumb="Service Area"
+        title={SERVICE_AREA.hero.title}
+        titleAccent={SERVICE_AREA.hero.titleAccent}
+        subtitle={SERVICE_AREA.hero.subtitle}
+        breadcrumb={SERVICE_AREA.hero.breadcrumb}
       />
 
-      {/* Coverage Map Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-            {/* Map Placeholder */}
             <motion.div
               className="rounded-2xl overflow-hidden border border-zinc-200/60 h-[350px] sm:h-[450px] bg-surface-50 flex items-center justify-center sticky top-28"
               initial={{ opacity: 0, scale: 0.97 }}
@@ -50,16 +30,13 @@ export default function ServiceAreaPage() {
               </div>
             </motion.div>
 
-            {/* Area Lists */}
             <div className="space-y-4">
               <div className="mb-2">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">Areas We Serve</h2>
-                <p className="text-zinc-500 text-[15px] leading-relaxed">
-                  Our team of licensed electricians provides fast, reliable service across the greater Ottawa region. If your area isn't listed, give us a call — we may still be able to help.
-                </p>
+                <p className="text-zinc-500 text-[15px] leading-relaxed">{SERVICE_AREA.description}</p>
               </div>
 
-              {areas.map((area, areaIndex) => (
+              {SERVICE_AREA.areas.map((area, areaIndex) => (
                 <motion.div
                   key={areaIndex}
                   className="bg-surface-50 rounded-xl p-5 border border-zinc-200/60"
@@ -87,7 +64,9 @@ export default function ServiceAreaPage() {
 
               <div className="bg-brand-50 rounded-xl p-4 border border-brand-200">
                 <p className="text-brand-800 text-sm font-medium">
-                  Don't see your area? <a href="tel:+16133017913" className="underline font-bold">Call us at (613) 301-7913</a> — we may still service your location.
+                  {SERVICE_AREA.notListedMessage.split(BRAND.phone)[0]}
+                  <a href={`tel:${BRAND.phoneRaw}`} className="underline font-bold">{BRAND.phone}</a>
+                  {SERVICE_AREA.notListedMessage.split(BRAND.phone)[1]}
                 </p>
               </div>
             </div>
@@ -95,10 +74,7 @@ export default function ServiceAreaPage() {
         </div>
       </section>
 
-      <CTABanner
-        title="In Your Area?"
-        subtitle="Get a free estimate for your electrical project. We'll send a certified electrician to you."
-      />
+      <CTABanner title={SERVICE_AREA.cta.title} subtitle={SERVICE_AREA.cta.subtitle} />
     </>
   );
 }

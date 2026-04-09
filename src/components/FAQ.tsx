@@ -2,41 +2,7 @@ import { useState } from 'react';
 import { Plus, Minus } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'motion/react';
 import SectionHeader from './ui/SectionHeader';
-
-const faqs = [
-  {
-    question: "How quickly can a technician arrive?",
-    answer: "Our electrician usually arrives within 30-60 minutes, depending on your location and service availability."
-  },
-  {
-    question: "Are your electricians certified and experienced?",
-    answer: "Yes, all our electricians are fully certified, licensed, and have years of experience in handling various electrical issues."
-  },
-  {
-    question: "Do you provide emergency electrical services?",
-    answer: "Yes, we offer 24/7 emergency electrical services for urgent issues that need immediate attention."
-  },
-  {
-    question: "How do you determine the service cost?",
-    answer: "We provide upfront pricing based on the scope of work after a thorough diagnosis. There are no hidden charges."
-  },
-  {
-    question: "Is there any service warranty?",
-    answer: "Yes, we offer a comprehensive service guarantee on all our repairs and installations."
-  },
-  {
-    question: "What types of electrical services do you offer?",
-    answer: "We offer a wide range of services including wiring, lighting installation, panel upgrades, EV charger installation, generator installation, and emergency repairs for both residential and commercial properties."
-  },
-  {
-    question: "Do you offer free estimates?",
-    answer: "Yes, we provide free, no-obligation estimates for all residential and commercial electrical projects. Contact us to schedule yours."
-  },
-  {
-    question: "What areas do you serve?",
-    answer: "We serve the greater metro area and surrounding communities. Visit our Service Area page for a complete list of locations we cover."
-  }
-];
+import { FAQ_DATA } from '../config/siteConfig';
 
 interface FAQProps {
   limit?: number;
@@ -44,16 +10,16 @@ interface FAQProps {
 
 export default function FAQ({ limit }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const displayFaqs = limit ? faqs.slice(0, limit) : faqs;
+  const displayFaqs = limit ? FAQ_DATA.items.slice(0, limit) : FAQ_DATA.items;
 
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-surface-50" id="faq-section">
       <div className="max-w-2xl mx-auto px-5 sm:px-8">
         <SectionHeader
-          badge="FAQ"
-          title="Frequently Asked"
-          titleAccent="Questions"
-          subtitle="Find quick answers to the most common questions about our electrical services."
+          badge={FAQ_DATA.badge}
+          title={FAQ_DATA.title}
+          titleAccent={FAQ_DATA.titleAccent}
+          subtitle={FAQ_DATA.subtitle}
         />
 
         <div className="space-y-2">

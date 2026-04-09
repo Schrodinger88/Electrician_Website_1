@@ -3,6 +3,10 @@ import { motion, useMotionValue, useTransform, animate, useInView } from 'motion
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import SectionHeader from './ui/SectionHeader';
+import { TRUST_SIGNALS } from '../config/siteConfig';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const iconMap: Record<string, any> = { Shield, Clock, Certificate, CheckCircle };
 
 function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: string }) {
   const count = useMotionValue(0);
@@ -30,33 +34,19 @@ function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: strin
 }
 
 export default function TrustSignals() {
-  const stats = [
-    { value: 1247, suffix: '+', label: 'Projects Completed' },
-    { value: 17, suffix: '+', label: 'Years Experience' },
-    { value: 4.9, suffix: '/5', label: 'Customer Rating' },
-    { value: 100, suffix: '%', label: 'Licensed & Insured' }
-  ];
-
-  const features = [
-    { icon: Shield, title: 'Licensed & Insured', description: 'Fully certified electricians with comprehensive liability coverage' },
-    { icon: Clock, title: '24/7 Emergency Service', description: 'Round-the-clock availability for urgent electrical issues' },
-    { icon: Certificate, title: 'Warranty Guaranteed', description: 'All work backed by our comprehensive workmanship warranty' },
-    { icon: CheckCircle, title: 'Free Estimates', description: 'No-obligation quotes for all residential and commercial projects' },
-  ];
-
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden" id="trust-section">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
         <SectionHeader
-          badge="Why Choose Us"
-          title="Trusted by Homeowners"
-          titleAccent="& Businesses Alike"
-          subtitle="Our commitment to safety, quality, and customer satisfaction has made us the go-to electrical service provider in the region."
+          badge={TRUST_SIGNALS.badge}
+          title={TRUST_SIGNALS.title}
+          titleAccent={TRUST_SIGNALS.titleAccent}
+          subtitle={TRUST_SIGNALS.subtitle}
         />
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20">
-          {stats.map((stat, index) => (
+          {TRUST_SIGNALS.stats.map((stat, index) => (
             <motion.div
               key={index}
               className="bg-surface-50 rounded-xl p-6 sm:p-7 border border-zinc-200/60 text-center"
@@ -75,8 +65,8 @@ export default function TrustSignals() {
 
         {/* Features */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+          {TRUST_SIGNALS.features.map((feature, index) => {
+            const Icon = iconMap[feature.iconName] || Shield;
             return (
               <motion.div
                 key={index}
@@ -112,14 +102,14 @@ export default function TrustSignals() {
                 <Star key={i} weight="fill" className="w-5 h-5 text-white/90" />
               ))}
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold mb-1.5">4.9 out of 5.0 Stars</h3>
-            <p className="text-white/70 text-base mb-6">Based on 400+ verified customer reviews</p>
+            <h3 className="text-2xl sm:text-3xl font-bold mb-1.5">{TRUST_SIGNALS.reviewBanner.rating}</h3>
+            <p className="text-white/70 text-base mb-6">{TRUST_SIGNALS.reviewBanner.subtitle}</p>
             <Link
               to="/reviews"
               id="trust-reviews-btn"
               className="inline-block px-6 py-3 rounded-lg bg-white text-brand-600 font-semibold text-[14px] hover:bg-white/90 transition-colors duration-200"
             >
-              Read Customer Reviews
+              {TRUST_SIGNALS.reviewBanner.buttonText}
             </Link>
           </div>
         </motion.div>

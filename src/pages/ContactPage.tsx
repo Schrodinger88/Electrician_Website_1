@@ -2,6 +2,10 @@ import { useState, type FormEvent } from 'react';
 import PageHero from '../components/ui/PageHero';
 import { motion } from 'motion/react';
 import { Phone, Envelope, MapPin, Clock, PaperPlaneTilt } from '@phosphor-icons/react';
+import { BRAND, CONTACT } from '../config/siteConfig';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const iconMap: Record<string, any> = { Phone, Envelope, MapPin, Clock };
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -16,23 +20,15 @@ export default function ContactPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    // In production, this would send the form data to your backend
   };
-
-  const contactInfo = [
-    { icon: Phone, label: 'Phone', value: '(613) 301-7913', href: 'tel:+16133017913', subtitle: 'Mon-Fri 7AM-8PM' },
-    { icon: Envelope, label: 'Email', value: 'info@proelectric.com', href: 'mailto:info@proelectric.com', subtitle: 'Response within 2 hours' },
-    { icon: MapPin, label: 'Location', value: 'Ottawa, ON, Canada', href: '#', subtitle: 'Serving greater Ottawa area' },
-    { icon: Clock, label: 'Emergency', value: '24/7 Available', href: 'tel:+16133017913', subtitle: 'Call anytime for emergencies' },
-  ];
 
   return (
     <>
       <PageHero
-        title="Get In Touch"
-        titleAccent="With Us"
-        subtitle="Ready to start your project? Get a free estimate or ask us anything. We respond within 30 minutes during business hours."
-        breadcrumb="Contact"
+        title={CONTACT.hero.title}
+        titleAccent={CONTACT.hero.titleAccent}
+        subtitle={CONTACT.hero.subtitle}
+        breadcrumb={CONTACT.hero.breadcrumb}
       />
 
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
@@ -42,8 +38,8 @@ export default function ContactPage() {
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">Contact Information</h2>
               <div className="space-y-3 sm:space-y-4 mb-10">
-                {contactInfo.map((item, index) => {
-                  const Icon = item.icon;
+                {CONTACT.info.map((item, index) => {
+                  const Icon = iconMap[item.iconName] || Phone;
                   return (
                     <motion.a
                       key={index}
@@ -67,7 +63,6 @@ export default function ContactPage() {
                 })}
               </div>
 
-              {/* Map Placeholder */}
               <div className="rounded-xl overflow-hidden border border-zinc-200/60 h-[200px] sm:h-[240px] bg-surface-50 flex items-center justify-center">
                 <div className="text-center text-zinc-400">
                   <MapPin weight="duotone" className="w-10 h-10 mx-auto mb-2 text-zinc-300" />
@@ -109,82 +104,35 @@ export default function ContactPage() {
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="contact-name" className="block text-[13px] font-medium text-zinc-600 mb-1.5">Full Name *</label>
-                        <input
-                          id="contact-name"
-                          type="text"
-                          required
-                          value={formState.name}
-                          onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all"
-                          placeholder="John Smith"
-                        />
+                        <input id="contact-name" type="text" required value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all" placeholder="John Smith" />
                       </div>
                       <div>
                         <label htmlFor="contact-email" className="block text-[13px] font-medium text-zinc-600 mb-1.5">Email Address *</label>
-                        <input
-                          id="contact-email"
-                          type="email"
-                          required
-                          value={formState.email}
-                          onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all"
-                          placeholder="john@example.com"
-                        />
+                        <input id="contact-email" type="email" required value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all" placeholder="john@example.com" />
                       </div>
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="contact-phone" className="block text-[13px] font-medium text-zinc-600 mb-1.5">Phone Number *</label>
-                        <input
-                          id="contact-phone"
-                          type="tel"
-                          required
-                          value={formState.phone}
-                          onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all"
-                          placeholder="(613) 000-0000"
-                        />
+                        <input id="contact-phone" type="tel" required value={formState.phone} onChange={(e) => setFormState({ ...formState, phone: e.target.value })} className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all" placeholder={BRAND.phone} />
                       </div>
                       <div>
                         <label htmlFor="contact-service" className="block text-[13px] font-medium text-zinc-600 mb-1.5">Service Needed</label>
-                        <select
-                          id="contact-service"
-                          value={formState.service}
-                          onChange={(e) => setFormState({ ...formState, service: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all"
-                        >
-                          <option value="">Select a service</option>
-                          <option value="residential">Residential Electrical</option>
-                          <option value="commercial">Commercial Services</option>
-                          <option value="panel">Panel Upgrades</option>
-                          <option value="lighting">Lighting Installation</option>
-                          <option value="wiring">Wiring & Rewiring</option>
-                          <option value="ev">EV Charger Installation</option>
-                          <option value="generator">Generator Installation</option>
-                          <option value="emergency">Emergency Service</option>
-                          <option value="other">Other</option>
+                        <select id="contact-service" value={formState.service} onChange={(e) => setFormState({ ...formState, service: e.target.value })} className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all">
+                          {CONTACT.formServiceOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
                         </select>
                       </div>
                     </div>
 
                     <div>
                       <label htmlFor="contact-message" className="block text-[13px] font-medium text-zinc-600 mb-1.5">Message</label>
-                      <textarea
-                        id="contact-message"
-                        rows={4}
-                        value={formState.message}
-                        onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all resize-none"
-                        placeholder="Describe your project or issue..."
-                      />
+                      <textarea id="contact-message" rows={4} value={formState.message} onChange={(e) => setFormState({ ...formState, message: e.target.value })} className="w-full px-3.5 py-2.5 rounded-lg border border-zinc-200 bg-white text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all resize-none" placeholder="Describe your project or issue..." />
                     </div>
 
-                    <button
-                      type="submit"
-                      id="contact-submit-btn"
-                      className="w-full bg-brand-500 text-white py-3 rounded-lg font-semibold text-[15px] hover:bg-brand-600 transition-colors duration-200"
-                    >
+                    <button type="submit" id="contact-submit-btn" className="w-full bg-brand-500 text-white py-3 rounded-lg font-semibold text-[15px] hover:bg-brand-600 transition-colors duration-200">
                       Send Message
                     </button>
 
