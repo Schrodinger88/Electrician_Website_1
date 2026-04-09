@@ -1,90 +1,118 @@
-import { Zap, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Lightning, Phone, Envelope, MapPin } from '@phosphor-icons/react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#2A1A0A] text-white pt-16 sm:pt-20 pb-8 relative overflow-hidden" role="contentinfo">
-      {/* Background gradient overlay to match the design's brown-ish dark footer */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 to-[#3b2006] pointer-events-none" aria-hidden="true"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12 mb-12 sm:mb-16">
-          <div className="lg:col-span-2">
-            <a href="/" className="flex items-center gap-2 mb-6 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-lg p-1 -m-1 w-fit" aria-label="Electrician Home">
-              <div className="bg-amber-500 p-2 rounded-full">
-                <Zap className="w-5 h-5 text-zinc-950" fill="currentColor" aria-hidden="true" />
+    <footer className="bg-zinc-950 text-white pt-20 pb-8 relative overflow-hidden" role="contentinfo">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand */}
+          <div className="lg:col-span-1">
+            <Link to="/" className="flex items-center gap-3 mb-6">
+              <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2.5 rounded-xl">
+                <Lightning weight="fill" className="w-5 h-5 text-zinc-950" />
               </div>
-              <span className="text-xl font-bold">Electrician</span>
-            </a>
-            <p className="text-zinc-400 text-sm sm:text-base max-w-xs mb-8 leading-relaxed">
-              Fast, safe, and professional electrical repair and installation for homes and offices.
+              <div className="flex flex-col">
+                <span className="text-xl font-bold">ProElectric</span>
+                <span className="text-[11px] text-zinc-500">Licensed & Insured</span>
+              </div>
+            </Link>
+            <p className="text-zinc-400 text-sm max-w-xs mb-6 leading-relaxed">
+              Professional electrical services for residential and commercial properties. Licensed, insured, and trusted by thousands.
             </p>
-            <div className="flex gap-3 sm:gap-4" role="list" aria-label="Social media links">
-              <a href="#" className="w-11 h-11 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-amber-500 hover:text-zinc-950 hover:border-amber-500 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-950" aria-label="Follow us on Facebook">
-                <Facebook className="w-5 h-5" aria-hidden="true" />
+            <div className="flex flex-col gap-3 text-sm text-zinc-400">
+              <a href="tel:+16133017913" className="flex items-center gap-2 hover:text-brand-400 transition-colors">
+                <Phone weight="fill" className="w-4 h-4 text-brand-500" />
+                (613) 301-7913
               </a>
-              <a href="#" className="w-11 h-11 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-amber-500 hover:text-zinc-950 hover:border-amber-500 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-950" aria-label="Follow us on Twitter">
-                <Twitter className="w-5 h-5" aria-hidden="true" />
+              <a href="mailto:info@proelectric.com" className="flex items-center gap-2 hover:text-brand-400 transition-colors">
+                <Envelope weight="fill" className="w-4 h-4 text-brand-500" />
+                info@proelectric.com
               </a>
-              <a href="#" className="w-11 h-11 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-amber-500 hover:text-zinc-950 hover:border-amber-500 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-950" aria-label="Follow us on Instagram">
-                <Instagram className="w-5 h-5" aria-hidden="true" />
-              </a>
-              <a href="#" className="w-11 h-11 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-amber-500 hover:text-zinc-950 hover:border-amber-500 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-950" aria-label="Follow us on LinkedIn">
-                <Linkedin className="w-5 h-5" aria-hidden="true" />
-              </a>
+              <div className="flex items-center gap-2">
+                <MapPin weight="fill" className="w-4 h-4 text-brand-500" />
+                Ottawa, ON, Canada
+              </div>
             </div>
           </div>
-          
+
+          {/* Quick Links */}
           <div>
             <h4 className="font-bold text-lg mb-6">Quick Links</h4>
-            <ul className="space-y-4 text-zinc-400 text-sm">
-              <li><a href="#" className="hover:text-amber-500 transition-colors">Home</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">Services</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">How We Work</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">FAQs</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">Contact Us</a></li>
+            <ul className="space-y-3 text-zinc-400 text-sm">
+              {[
+                { label: 'Home', path: '/' },
+                { label: 'Services', path: '/services' },
+                { label: 'About Us', path: '/about' },
+                { label: 'Reviews', path: '/reviews' },
+                { label: 'Gallery', path: '/gallery' },
+                { label: 'Contact Us', path: '/contact' },
+              ].map((link) => (
+                <li key={link.path}>
+                  <Link to={link.path} className="hover:text-brand-400 transition-colors duration-200">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-          
+
+          {/* Services */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Contact Information</h4>
-            <ul className="space-y-4 text-zinc-400 text-sm">
-              <li>Phone: 01XXX-XXXXXX</li>
-              <li>WhatsApp: 01XXX-XXXXXX</li>
-              <li>Email: support@yourmail.com</li>
+            <h4 className="font-bold text-lg mb-6">Our Services</h4>
+            <ul className="space-y-3 text-zinc-400 text-sm">
+              {[
+                'Residential Electrical',
+                'Commercial Services',
+                'Panel Upgrades',
+                'Lighting Installation',
+                'EV Charger Installation',
+                'Emergency Repairs',
+              ].map((service) => (
+                <li key={service}>
+                  <Link to="/services" className="hover:text-brand-400 transition-colors duration-200">
+                    {service}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-          
+
+          {/* Hours & Info */}
           <div>
             <h4 className="font-bold text-lg mb-6">Service Hours</h4>
-            <ul className="space-y-4 text-zinc-400 text-sm mb-8">
-              <li>Saturday–Thursday: 9 AM – 10 PM</li>
-              <li>Friday: Emergency Service Only</li>
+            <ul className="space-y-3 text-zinc-400 text-sm mb-8">
+              <li className="flex justify-between">
+                <span>Monday - Friday</span>
+                <span className="text-white font-medium">7 AM - 8 PM</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Saturday</span>
+                <span className="text-white font-medium">8 AM - 5 PM</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Sunday</span>
+                <span className="text-white font-medium">Emergency Only</span>
+              </li>
+              <li className="pt-2 border-t border-zinc-800">
+                <span className="text-brand-400 font-medium">24/7 Emergency Service Available</span>
+              </li>
             </ul>
-            
-            <h4 className="font-bold text-lg mb-4">Subscribe to our Newsletter</h4>
-            <form className="flex" onSubmit={(e) => e.preventDefault()}>
-              <label htmlFor="newsletter-email" className="sr-only">Email address</label>
-              <input
-                id="newsletter-email"
-                type="email"
-                placeholder="Enter your Email"
-                className="bg-zinc-800/50 border border-zinc-700 text-white px-4 py-3 rounded-l-lg w-full focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500 text-sm min-h-[44px]"
-                aria-label="Email address for newsletter subscription"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-white text-zinc-950 px-5 py-3 rounded-r-lg font-medium text-sm hover:bg-amber-500 active:bg-amber-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-950 min-h-[44px]"
-                aria-label="Subscribe to newsletter"
-              >
-                Subscribe
-              </button>
-            </form>
+
+            <h4 className="font-bold text-lg mb-4">Resources</h4>
+            <ul className="space-y-3 text-zinc-400 text-sm">
+              <li><Link to="/faq" className="hover:text-brand-400 transition-colors">FAQ</Link></li>
+              <li><Link to="/service-area" className="hover:text-brand-400 transition-colors">Service Area</Link></li>
+            </ul>
           </div>
         </div>
-        
-        <div className="border-t border-zinc-800 pt-8 text-center text-zinc-500 text-sm">
-          <p>© 2025 Electrical Service. All Rights Reserved</p>
+
+        <div className="border-t border-zinc-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-zinc-500 text-sm">
+          <p>&copy; {new Date().getFullYear()} ProElectric. All Rights Reserved.</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-brand-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-brand-400 transition-colors">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>
