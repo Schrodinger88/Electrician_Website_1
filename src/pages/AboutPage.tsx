@@ -28,52 +28,52 @@ export default function AboutPage() {
       />
 
       {/* Story Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
-              className="rounded-[2.5rem] overflow-hidden shadow-2xl"
-              initial={{ opacity: 0, x: -30 }}
+              className="rounded-2xl overflow-hidden"
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
               <img
                 src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&h=600&fit=crop"
                 alt="Our team of professional electricians"
-                className="w-full h-[500px] object-cover"
+                className="w-full h-[350px] sm:h-[450px] object-cover rounded-2xl"
                 loading="lazy"
               />
             </motion.div>
 
             <motion.div
-              className="space-y-6"
-              initial={{ opacity: 0, x: 30 }}
+              className="space-y-5"
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="inline-block px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/20">
-                <span className="text-sm text-brand-600 font-semibold">Our Story</span>
+              <div className="inline-block px-3 py-1.5 rounded-full bg-brand-500/[0.08] border border-brand-500/[0.12]">
+                <span className="text-[13px] text-brand-600 font-semibold">Our Story</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
                 17+ Years of Trusted <span className="text-brand-500">Electrical Service</span>
               </h2>
-              <p className="text-zinc-600 text-lg leading-relaxed">
+              <p className="text-zinc-500 text-[15px] leading-relaxed">
                 Founded with a simple mission: provide honest, reliable electrical services at fair prices. What started as a one-man operation has grown into a trusted team of certified professionals serving thousands of residential and commercial clients.
               </p>
-              <p className="text-zinc-600 text-lg leading-relaxed">
+              <p className="text-zinc-500 text-[15px] leading-relaxed">
                 Every member of our team is hand-picked for their expertise, professionalism, and commitment to doing the job right the first time. We treat every home and business like our own.
               </p>
 
-              <div className="grid grid-cols-2 gap-6 pt-6">
+              <div className="grid grid-cols-2 gap-3 pt-4">
                 {[
                   { label: 'Projects Completed', value: '1,200+' },
                   { label: 'Years in Business', value: '17+' },
                   { label: 'Customer Rating', value: '4.9/5.0' },
                   { label: 'Team Members', value: '12+' },
                 ].map((stat, i) => (
-                  <div key={i} className="text-center p-4 bg-zinc-50 rounded-2xl">
-                    <div className="text-2xl font-bold text-zinc-900">{stat.value}</div>
-                    <div className="text-sm text-zinc-500">{stat.label}</div>
+                  <div key={i} className="text-center p-3.5 bg-surface-50 rounded-xl border border-zinc-200/60">
+                    <div className="text-xl font-bold text-zinc-900">{stat.value}</div>
+                    <div className="text-[13px] text-zinc-500">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -83,30 +83,30 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-24 bg-zinc-50">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Our Core Values</h2>
-            <p className="text-zinc-600 text-lg max-w-2xl mx-auto">The principles that guide every project we undertake.</p>
+      <section className="py-16 sm:py-20 lg:py-24 bg-surface-50">
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">Our Core Values</h2>
+            <p className="text-zinc-500 text-base max-w-xl mx-auto">The principles that guide every project we undertake.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-[2rem] p-8 border border-slate-200/50 text-center group hover:shadow-lg transition-all duration-500"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="bg-white rounded-xl p-6 sm:p-7 border border-zinc-200/60 text-center group hover:border-zinc-300/80 transition-all duration-300"
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -6 }}
+                  transition={{ delay: index * 0.08, duration: 0.45 }}
+                  whileHover={{ y: -3 }}
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-brand-500/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-500 transition-all duration-300">
-                    <Icon weight="duotone" className="w-7 h-7 text-brand-600 group-hover:text-white transition-colors duration-300" />
+                  <div className="w-11 h-11 rounded-lg bg-brand-500/[0.08] flex items-center justify-center mx-auto mb-5 group-hover:bg-brand-500 transition-colors duration-250">
+                    <Icon weight="duotone" className="w-5 h-5 text-brand-600 group-hover:text-white transition-colors duration-250" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-                  <p className="text-zinc-600 text-sm leading-relaxed">{value.desc}</p>
+                  <h3 className="text-[17px] font-semibold mb-2 tracking-tight">{value.title}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{value.desc}</p>
                 </motion.div>
               );
             })}
@@ -115,36 +115,36 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Meet Our Team</h2>
-            <p className="text-zinc-600 text-lg max-w-2xl mx-auto">Certified professionals dedicated to delivering excellence on every project.</p>
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">Meet Our Team</h2>
+            <p className="text-zinc-500 text-base max-w-xl mx-auto">Certified professionals dedicated to delivering excellence on every project.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {team.map((member, index) => (
               <motion.div
                 key={index}
                 className="group"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.08, duration: 0.45 }}
               >
-                <div className="rounded-[2rem] overflow-hidden mb-5 aspect-[3/4] relative">
+                <div className="rounded-xl overflow-hidden mb-4 aspect-[3/4] relative">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                     loading="lazy"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute bottom-4 left-4 right-4 backdrop-blur-md bg-white/10 rounded-xl p-3 border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-white text-sm font-medium">{member.experience} experience</span>
+                  <div className="absolute bottom-3 left-3 right-3 backdrop-blur-md bg-black/30 rounded-lg p-2.5 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-white text-[13px] font-medium">{member.experience} experience</span>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-zinc-900">{member.name}</h3>
-                <p className="text-brand-600 font-medium text-sm">{member.role}</p>
+                <h3 className="text-[15px] sm:text-[17px] font-semibold text-zinc-900">{member.name}</h3>
+                <p className="text-brand-600 font-medium text-[13px]">{member.role}</p>
               </motion.div>
             ))}
           </div>
@@ -152,15 +152,15 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications */}
-      <section className="py-24 bg-zinc-950 text-white">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6">
+      <section className="py-16 sm:py-20 lg:py-24 bg-zinc-950 text-white">
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
             Licenses & <span className="text-brand-400">Certifications</span>
           </h2>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto mb-12">
+          <p className="text-zinc-400 text-base max-w-xl mx-auto mb-10">
             Fully licensed, bonded, and insured. Your safety and peace of mind come first.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
             {[
               { icon: Certificate, label: 'Master Electrician License' },
               { icon: Shield, label: 'Fully Insured & Bonded' },
@@ -171,14 +171,14 @@ export default function AboutPage() {
               return (
                 <motion.div
                   key={index}
-                  className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 text-center"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  className="bg-white/[0.04] border border-white/[0.06] rounded-xl p-5 sm:p-6 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.08, duration: 0.45 }}
                 >
-                  <Icon weight="duotone" className="w-10 h-10 text-brand-400 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-zinc-300">{cert.label}</p>
+                  <Icon weight="duotone" className="w-8 h-8 text-brand-400 mx-auto mb-3" />
+                  <p className="text-[13px] font-medium text-zinc-300">{cert.label}</p>
                 </motion.div>
               );
             })}

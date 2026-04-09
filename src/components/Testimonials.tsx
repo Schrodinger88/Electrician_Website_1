@@ -43,43 +43,43 @@ export default function Testimonials({ showAll = false }: TestimonialsProps) {
   ] : testimonials;
 
   return (
-    <section className="py-24 sm:py-32 bg-white">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
+    <section className="py-16 sm:py-20 lg:py-24 bg-white" id="testimonials-section">
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
         <SectionHeader
           badge="Testimonials"
           title="What Our Clients Say"
           subtitle="Hear from satisfied customers who trust us for fast, reliable, and professional electrical services."
         />
 
-        <div className={`grid sm:grid-cols-2 ${showAll ? 'lg:grid-cols-3' : 'lg:grid-cols-3'} gap-6`}>
+        <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5`}>
           {allTestimonials.map((testimonial, index) => (
             <motion.article
               key={index}
-              className="p-8 rounded-[2rem] border border-slate-200/50 bg-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] transition-all duration-500"
-              initial={{ opacity: 0, y: 20 }}
+              className="p-6 sm:p-7 rounded-xl border border-zinc-200/60 bg-white hover:border-zinc-300/80 transition-all duration-300"
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.45, delay: index * 0.06, ease: [0.25, 1, 0.5, 1] }}
             >
-              <div className="flex items-center gap-1 mb-4">
+              <div className="flex items-center gap-0.5 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} weight="fill" className="w-4 h-4 text-brand-500" />
+                  <Star key={i} weight="fill" className="w-4 h-4 text-amber-400" />
                 ))}
               </div>
 
-              <p className="text-zinc-600 leading-relaxed mb-6">"{testimonial.review}"</p>
+              <p className="text-zinc-600 text-[15px] leading-relaxed mb-6">"{testimonial.review}"</p>
 
               <div className="flex items-center gap-3 pt-4 border-t border-zinc-100">
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-brand-100"
+                  className="w-10 h-10 rounded-full object-cover ring-1 ring-zinc-200"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                 />
                 <div>
-                  <h4 className="font-bold text-zinc-900">{testimonial.name}</h4>
-                  <p className="text-sm text-zinc-500">{testimonial.role}</p>
+                  <h4 className="font-semibold text-zinc-900 text-[15px]">{testimonial.name}</h4>
+                  <p className="text-[13px] text-zinc-400">{testimonial.role}</p>
                 </div>
               </div>
             </motion.article>
@@ -88,17 +88,18 @@ export default function Testimonials({ showAll = false }: TestimonialsProps) {
 
         {!showAll && (
           <motion.div
-            className="mt-12 text-center"
-            initial={{ opacity: 0, y: 20 }}
+            className="mt-10 text-center"
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <Link
               to="/reviews"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-zinc-900 text-white font-semibold hover:bg-zinc-800 transition-all duration-300"
+              id="view-all-reviews-btn"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-zinc-900 text-white font-semibold text-[14px] hover:bg-zinc-800 transition-colors duration-200"
             >
               View All Reviews
-              <span>→</span>
+              <span className="text-zinc-400">→</span>
             </Link>
           </motion.div>
         )}

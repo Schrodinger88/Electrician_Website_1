@@ -4,19 +4,24 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand Colors - Easy to swap for each client */
-  --color-brand-50: #f0fdf4;
-  --color-brand-100: #dcfce7;
-  --color-brand-200: #bbf7d0;
-  --color-brand-300: #86efac;
-  --color-brand-400: #4ade80;
-  --color-brand-500: #22c55e;
-  --color-brand-600: #16a34a;
-  --color-brand-700: #15803d;
-  --color-brand-800: #166534;
-  --color-brand-900: #14532d;
+  /* Brand Colors - Refined, natural palette */
+  --color-brand-50: #f0faf4;
+  --color-brand-100: #ddf3e4;
+  --color-brand-200: #b8e5c8;
+  --color-brand-300: #84d3a4;
+  --color-brand-400: #4cb97a;
+  --color-brand-500: #2a9d5e;
+  --color-brand-600: #1e7d4b;
+  --color-brand-700: #1a643e;
+  --color-brand-800: #184f33;
+  --color-brand-900: #15412b;
 
-  /* Accent (for emergency/urgency) */
+  /* Neutral tones — warmer than default zinc */
+  --color-surface-50: #fafaf9;
+  --color-surface-100: #f5f5f4;
+  --color-surface-200: #e7e5e4;
+
+  /* Accent (softened for emergency/urgency) */
   --color-accent-400: #f87171;
   --color-accent-500: #ef4444;
   --color-accent-600: #dc2626;
@@ -25,19 +30,46 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base body — prevent horizontal scroll on mobile */
+body {
+  overflow-x: hidden;
+  min-height: 100dvh;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #18181b;
+  background: #1c1c1e;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-  border-radius: 4px;
+  background: #3a3a3c;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: #48484a;
+}
+
+/* Focus visible ring for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Responsive typography base */
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
 }

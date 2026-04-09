@@ -38,17 +38,18 @@ export default function GalleryPage() {
         breadcrumb="Gallery"
       />
 
-      <section className="py-24 bg-white">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
+                id={`gallery-filter-${cat.toLowerCase().replace(' ', '-')}`}
+                className={`px-4 py-2 rounded-lg font-medium text-[13px] transition-all duration-200 ${
                   activeCategory === cat
-                    ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/30'
+                    ? 'bg-zinc-900 text-white'
                     : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
                 }`}
               >
@@ -58,35 +59,35 @@ export default function GalleryPage() {
           </div>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             <AnimatePresence mode="popLayout">
               {filtered.map((project, index) => (
                 <motion.div
                   key={project.title}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.3, delay: index * 0.04 }}
                   className="group cursor-pointer"
                   onClick={() => setLightboxImage(project)}
                 >
-                  <div className="rounded-2xl overflow-hidden border border-slate-200/50 relative aspect-[4/3]">
+                  <div className="rounded-xl overflow-hidden border border-zinc-200/60 relative aspect-[4/3]">
                     <img
                       src={project.src}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                       <div>
-                        <h3 className="text-white font-bold text-lg">{project.title}</h3>
-                        <p className="text-white/80 text-sm">{project.desc}</p>
+                        <h3 className="text-white font-semibold text-[15px]">{project.title}</h3>
+                        <p className="text-white/70 text-[13px]">{project.desc}</p>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-3">
-                    <span className="text-xs font-medium text-brand-600 bg-brand-50 px-3 py-1 rounded-full">{project.category}</span>
+                  <div className="mt-2.5">
+                    <span className="text-[11px] font-medium text-brand-600 bg-brand-500/[0.08] px-2.5 py-1 rounded-md">{project.category}</span>
                   </div>
                 </motion.div>
               ))}
@@ -99,7 +100,7 @@ export default function GalleryPage() {
       <AnimatePresence>
         {lightboxImage && (
           <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -109,26 +110,27 @@ export default function GalleryPage() {
               onClick={() => setLightboxImage(null)}
             />
             <motion.div
-              className="relative max-w-4xl w-full"
-              initial={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-3xl w-full"
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
             >
               <button
                 onClick={() => setLightboxImage(null)}
-                className="absolute -top-12 right-0 text-white hover:text-brand-400 transition-colors"
+                className="absolute -top-10 right-0 text-white/60 hover:text-white transition-colors"
                 aria-label="Close lightbox"
+                id="lightbox-close"
               >
-                <X className="w-8 h-8" weight="bold" />
+                <X className="w-6 h-6" weight="bold" />
               </button>
               <img
                 src={lightboxImage.src}
                 alt={lightboxImage.title}
-                className="w-full rounded-2xl shadow-2xl"
+                className="w-full rounded-xl"
               />
-              <div className="mt-4 text-center">
-                <h3 className="text-white text-xl font-bold">{lightboxImage.title}</h3>
-                <p className="text-white/60">{lightboxImage.desc}</p>
+              <div className="mt-3 text-center">
+                <h3 className="text-white text-lg font-semibold">{lightboxImage.title}</h3>
+                <p className="text-white/50 text-sm">{lightboxImage.desc}</p>
               </div>
             </motion.div>
           </motion.div>

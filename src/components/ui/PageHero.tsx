@@ -10,25 +10,25 @@ interface PageHeroProps {
 
 export default function PageHero({ title, titleAccent, subtitle, breadcrumb }: PageHeroProps) {
   return (
-    <section className="bg-zinc-950 text-white pt-32 pb-20 relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 relative z-10">
+    <section className="bg-zinc-950 text-white pt-28 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 relative z-10">
         {/* Breadcrumb */}
         <motion.div
-          className="flex items-center gap-2 text-sm text-zinc-400 mb-8"
-          initial={{ opacity: 0, y: 10 }}
+          className="flex items-center gap-2 text-[13px] text-zinc-500 mb-6"
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <Link to="/" className="hover:text-white transition-colors">Home</Link>
-          <span>/</span>
-          <span className="text-brand-400">{breadcrumb}</span>
+          <Link to="/" className="hover:text-zinc-300 transition-colors">Home</Link>
+          <span className="text-zinc-600">/</span>
+          <span className="text-zinc-300">{breadcrumb}</span>
         </motion.div>
 
         <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-none mb-6"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-3xl sm:text-4xl md:text-[48px] lg:text-[56px] font-bold tracking-[-0.03em] leading-[1.1] mb-5"
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
         >
           {title}
           {titleAccent && (
@@ -40,10 +40,10 @@ export default function PageHero({ title, titleAccent, subtitle, breadcrumb }: P
         </motion.h1>
 
         <motion.p
-          className="text-zinc-400 text-lg leading-relaxed max-w-[60ch]"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-zinc-400 text-base sm:text-[17px] leading-relaxed max-w-[55ch]"
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
         >
           {subtitle}
         </motion.p>
@@ -51,7 +51,7 @@ export default function PageHero({ title, titleAccent, subtitle, breadcrumb }: P
 
       {/* Ambient Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/5 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-500/[0.03] rounded-full blur-[120px]" />
       </div>
     </section>
   );
