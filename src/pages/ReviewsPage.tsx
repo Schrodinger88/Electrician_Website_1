@@ -72,6 +72,7 @@ export default function ReviewsPage() {
         </div>
       </section>
 
+      {/* Vertical Marquee Columns */}
       <Testimonials showAll />
 
       <CTABanner

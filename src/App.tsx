@@ -10,7 +10,7 @@ import ContactPage from './pages/ContactPage';
 import ReviewsPage from './pages/ReviewsPage';
 import ServiceAreaPage from './pages/ServiceAreaPage';
 import FAQPage from './pages/FAQPage';
-import GalleryPage from './pages/GalleryPage';
+
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/service-area" element={<ServiceAreaPage />} />
         <Route path="/faq" element={<FAQPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
+
       </Routes>
       <Footer />
     </div>

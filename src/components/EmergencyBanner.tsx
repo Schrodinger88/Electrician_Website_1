@@ -1,9 +1,21 @@
 import { Lightning, Phone, Clock, ShieldCheck } from '@phosphor-icons/react';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
 
 export default function EmergencyBanner() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Parallax transforms
+  const bgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  const glowScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.9]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.4]);
+
   return (
-    <section className="py-16 sm:py-20 bg-zinc-900 relative overflow-hidden" id="emergency-section">
+    <section ref={sectionRef} className="py-16 sm:py-20 bg-zinc-900 relative overflow-hidden" id="emergency-section">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
@@ -89,13 +101,23 @@ export default function EmergencyBanner() {
         </div>
       </div>
 
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+      {/* Parallax grid pattern */}
+      <motion.div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ y: bgY }}>
         <div className="absolute inset-0" style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }} />
-      </div>
+      </motion.div>
+
+      {/* Parallax glow orbs */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/[0.06] rounded-full blur-[120px] pointer-events-none"
+        style={{ scale: glowScale, opacity: glowOpacity }}
+      />
+      <motion.div
+        className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"
+        style={{ y: bgY }}
+      />
     </section>
   );
 }

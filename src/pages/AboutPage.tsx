@@ -1,7 +1,33 @@
 import PageHero from '../components/ui/PageHero';
 import CTABanner from '../components/ui/CTABanner';
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useTransform, animate, useInView } from 'motion/react';
 import { Shield, Certificate, Users, Clock, Trophy, Target } from '@phosphor-icons/react';
+import { useEffect, useRef } from 'react';
+
+function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: string }) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { once: true, margin: '-80px' });
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(count, value, { duration: 1.8, ease: [0.25, 1, 0.5, 1] });
+    return controls.stop;
+  }, [count, value, inView]);
+
+  useEffect(() => {
+    const unsubscribe = rounded.on('change', (latest) => {
+      if (nodeRef.current) {
+        nodeRef.current.textContent = latest + suffix;
+      }
+    });
+    return () => unsubscribe();
+  }, [rounded, suffix]);
+
+  return <div ref={containerRef}><span ref={nodeRef}>0{suffix}</span></div>;
+}
 
 export default function AboutPage() {
   const team = [
@@ -27,57 +53,102 @@ export default function AboutPage() {
         breadcrumb="About"
       />
 
-      {/* Story Section */}
+      {/* Story Section — Sticky Image + Scrolling Content */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+            {/* Left: Sticky Image */}
             <motion.div
-              className="rounded-2xl overflow-hidden"
+              className="lg:sticky lg:top-28 rounded-2xl overflow-hidden"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <img
-                src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&h=600&fit=crop"
-                alt="Our team of professional electricians"
-                className="w-full h-[350px] sm:h-[450px] object-cover rounded-2xl"
-                loading="lazy"
-              />
+              <div className="relative rounded-2xl overflow-hidden group">
+                <img
+                  src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&h=600&fit=crop"
+                  alt="Our team of professional electricians"
+                  className="w-full h-[350px] sm:h-[450px] lg:h-[520px] object-cover rounded-2xl group-hover:scale-[1.02] transition-transform duration-700"
+                  loading="lazy"
+                />
+                {/* Floating badge */}
+                <div className="absolute bottom-5 left-5 right-5 backdrop-blur-xl bg-white/90 rounded-xl p-4 border border-zinc-200/60 shadow-lg">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-2xl font-bold text-zinc-900">17+ Years</div>
+                      <div className="text-[13px] text-zinc-500 font-medium">Trusted Electrical Service</div>
+                    </div>
+                    <div className="w-12 h-12 rounded-xl bg-brand-500 flex items-center justify-center">
+                      <Trophy weight="fill" className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
-            <motion.div
-              className="space-y-5"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="inline-block px-3 py-1.5 rounded-full bg-brand-500/[0.08] border border-brand-500/[0.12]">
-                <span className="text-[13px] text-brand-600 font-semibold">Our Story</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                17+ Years of Trusted <span className="text-brand-500">Electrical Service</span>
-              </h2>
-              <p className="text-zinc-500 text-[15px] leading-relaxed">
-                Founded with a simple mission: provide honest, reliable electrical services at fair prices. What started as a one-man operation has grown into a trusted team of certified professionals serving thousands of residential and commercial clients.
-              </p>
-              <p className="text-zinc-500 text-[15px] leading-relaxed">
-                Every member of our team is hand-picked for their expertise, professionalism, and commitment to doing the job right the first time. We treat every home and business like our own.
-              </p>
+            {/* Right: Scrolling Content */}
+            <div className="space-y-10">
+              <motion.div
+                className="space-y-5"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-block px-3 py-1.5 rounded-full bg-brand-500/[0.08] border border-brand-500/[0.12]">
+                  <span className="text-[13px] text-brand-600 font-semibold">Our Story</span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+                  17+ Years of Trusted <span className="text-brand-500">Electrical Service</span>
+                </h2>
+                <p className="text-zinc-500 text-[15px] leading-relaxed">
+                  Founded with a simple mission: provide honest, reliable electrical services at fair prices. What started as a one-man operation has grown into a trusted team of certified professionals serving thousands of residential and commercial clients.
+                </p>
+                <p className="text-zinc-500 text-[15px] leading-relaxed">
+                  Every member of our team is hand-picked for their expertise, professionalism, and commitment to doing the job right the first time. We treat every home and business like our own.
+                </p>
+              </motion.div>
 
-              <div className="grid grid-cols-2 gap-3 pt-4">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-3">
                 {[
-                  { label: 'Projects Completed', value: '1,200+' },
-                  { label: 'Years in Business', value: '17+' },
-                  { label: 'Customer Rating', value: '4.9/5.0' },
-                  { label: 'Team Members', value: '12+' },
+                  { label: 'Projects Completed', value: 1200, suffix: '+' },
+                  { label: 'Years in Business', value: 17, suffix: '+' },
+                  { label: 'Customer Rating', value: 4.9, suffix: '/5' },
+                  { label: 'Team Members', value: 12, suffix: '+' },
                 ].map((stat, i) => (
-                  <div key={i} className="text-center p-3.5 bg-surface-50 rounded-xl border border-zinc-200/60">
-                    <div className="text-xl font-bold text-zinc-900">{stat.value}</div>
-                    <div className="text-[13px] text-zinc-500">{stat.label}</div>
-                  </div>
+                  <motion.div
+                    key={i}
+                    className="text-center p-4 sm:p-5 bg-surface-50 rounded-xl border border-zinc-200/60 group hover:border-brand-200 hover:bg-brand-50/30 transition-all duration-300"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.4 }}
+                    whileHover={{ y: -2 }}
+                  >
+                    <div className="text-2xl sm:text-3xl font-bold text-zinc-900 mb-1">
+                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                    </div>
+                    <div className="text-[13px] text-zinc-500 font-medium">{stat.label}</div>
+                  </motion.div>
                 ))}
               </div>
-            </motion.div>
+
+              {/* Mission */}
+              <motion.div
+                className="bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative z-10">
+                  <h3 className="text-lg font-bold mb-3">Our Mission</h3>
+                  <p className="text-zinc-400 text-[15px] leading-relaxed">
+                    To empower homes and businesses with safe, efficient electrical solutions — delivered with integrity, transparency, and a relentless focus on customer satisfaction.
+                  </p>
+                </div>
+                <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-brand-500/[0.06] rounded-full blur-[80px] pointer-events-none" />
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
