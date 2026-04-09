@@ -1,122 +1,132 @@
-import { Phone, Shield, Clock, ArrowRight } from '@phosphor-icons/react';
+import { Phone, Shield, Clock, ArrowRight, Star } from '@phosphor-icons/react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
-    <section className="bg-zinc-950 text-white pt-24 sm:pt-28 pb-20 sm:pb-28 relative overflow-hidden min-h-[100dvh] flex items-center" id="hero-section">
+    <section className="bg-surface-950 text-white pt-32 sm:pt-40 pb-20 sm:pb-28 relative overflow-hidden min-h-[100dvh] flex items-center" id="hero-section">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 w-full relative z-10">
-        <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
           {/* Left: Content */}
           <motion.div
-            className="space-y-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+            className="space-y-8 relative z-20"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
           >
             {/* Trust Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-white/[0.08]"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] shadow-glass backdrop-blur-md"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Shield weight="fill" className="w-3.5 h-3.5 text-brand-400" />
-              <span className="text-[13px] text-zinc-300 font-medium">Licensed & Insured Electricians</span>
+              <Shield weight="fill" className="w-4 h-4 text-brand-400 drop-shadow-[0_0_8px_rgba(76,185,122,0.8)]" />
+              <span className="text-[12px] text-zinc-300 font-bold tracking-widest uppercase">Licensed & Insured</span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] font-bold tracking-[-0.035em] leading-[1.05]">
-              Professional{' '}
-              <br className="hidden sm:block" />
-              Electrical{' '}
-              <span className="text-brand-400">Services</span>{' '}
-              <br className="hidden sm:block" />
-              You Can Trust
+            <h1 className="text-5xl sm:text-6xl md:text-[68px] lg:text-[76px] font-bold tracking-tight leading-[1] text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/60">
+              Expertise that <br className="hidden sm:block" />
+              powers your <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-brand-500 drop-shadow-sm">Property</span>
             </h1>
 
-            <p className="text-zinc-400 text-base sm:text-[17px] leading-relaxed max-w-[52ch]">
-              Expert electrical solutions for residential and commercial properties. From panel upgrades to emergency repairs, we deliver safe, reliable service backed by certified professionals.
+            <p className="text-zinc-400 text-lg sm:text-[19px] leading-relaxed max-w-[48ch] font-light">
+              Premium electrical solutions for residential and commercial properties. From modern panel upgrades to rapid emergency repairs, we deliver safe, reliable service.
             </p>
 
             {/* Primary CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <motion.a
                 href="tel:+16133017913"
                 id="hero-call-btn"
-                className="flex items-center justify-center gap-3 bg-brand-500 text-white px-7 py-4 rounded-xl font-semibold hover:bg-brand-600 transition-colors duration-200 group"
-                whileHover={{ y: -1 }}
+                className="relative flex items-center justify-center gap-3 bg-brand-500 text-white px-8 py-4.5 rounded-2xl font-semibold shadow-[0_0_40px_rgba(42,157,94,0.3)] hover:shadow-[0_0_60px_rgba(42,157,94,0.5)] transition-all duration-300 overflow-hidden group"
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Phone weight="fill" className="w-5 h-5" />
-                <span className="text-base">(613) 301-7913</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
+                <Phone weight="fill" className="w-5 h-5 relative z-10 drop-shadow-md" />
+                <span className="text-[17px] relative z-10 drop-shadow-sm">(613) 301-7913</span>
               </motion.a>
 
               <Link
                 to="/contact"
                 id="hero-estimate-btn"
-                className="flex items-center justify-center gap-2 text-zinc-300 px-6 py-4 rounded-xl font-medium hover:text-white hover:bg-white/[0.06] transition-all duration-200 border border-white/[0.1]"
+                className="flex items-center justify-center gap-3 text-zinc-300 px-8 py-4.5 rounded-2xl font-medium hover:text-white hover:bg-white/[0.05] transition-all duration-300 border border-white/[0.1] backdrop-blur-md shadow-glass group"
               >
-                <span>Free Estimate</span>
-                <ArrowRight className="w-4 h-4" />
+                <span className="text-[17px]">Free Estimate</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-6 sm:gap-8 pt-4 border-t border-white/[0.06]">
-              <div className="flex items-center gap-2 text-zinc-400">
-                <Clock weight="fill" className="w-4 h-4 text-brand-400" />
-                <span className="text-[13px] font-medium">24/7 Emergency Service</span>
+            <div className="flex flex-wrap items-center gap-6 sm:gap-10 pt-6 border-t border-white/[0.06]">
+              <div className="flex items-center gap-3 text-zinc-400 group cursor-default">
+                <div className="p-2.5 rounded-xl bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors border border-white/[0.05]">
+                  <Clock weight="duotone" className="w-5 h-5 text-brand-400" />
+                </div>
+                <span className="text-[14px] font-medium">24/7 Emergency Service</span>
               </div>
-              <div className="flex items-center gap-2 text-zinc-400">
-                <Shield weight="fill" className="w-4 h-4 text-brand-400" />
-                <span className="text-[13px] font-medium">17+ Years Experience</span>
+              <div className="flex items-center gap-3 text-zinc-400 group cursor-default">
+                <div className="p-2.5 rounded-xl bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors border border-white/[0.05]">
+                  <Shield weight="duotone" className="w-5 h-5 text-brand-400" />
+                </div>
+                <span className="text-[14px] font-medium">17+ Years Experience</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Right: Image */}
+          {/* Right: Asymmetric Image / Bento */}
           <motion.div
-            className="relative w-full hidden lg:block"
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
+            className="relative w-full hidden lg:block h-[640px] perspective-1000"
+            initial={{ opacity: 0, rotateY: 10, scale: 0.95 }}
+            animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
           >
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-white/[0.06] relative">
+            <div className="absolute inset-x-8 top-0 bottom-12 rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform-gpu z-10">
               <img
-                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=1000&fit=crop"
-                alt="Certified electrician performing panel inspection"
-                className="w-full h-full object-cover"
+                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=1200&fit=crop"
+                alt="Certified electrician"
+                className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[2000ms] ease-out"
                 loading="eager"
               />
-
-              {/* Floating Stat Card */}
-              <motion.div
-                className="absolute bottom-6 left-6 right-6 backdrop-blur-xl bg-black/40 rounded-xl p-5 border border-white/[0.08]"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-2xl font-bold text-white">4.9★</div>
-                    <div className="text-[13px] text-white/60">73+ Reviews</div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-brand-400">100%</div>
-                    <div className="text-[13px] text-white/60">Licensed</div>
-                  </div>
-                </div>
-              </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/20 to-transparent" />
             </div>
+
+            {/* Floating Glass Bento Card */}
+            <motion.div
+              className="absolute bottom-4 -left-6 backdrop-blur-2xl bg-surface-900/60 rounded-2xl p-6 border border-white/[0.1] shadow-glass shadow-[0_30px_60px_rgba(0,0,0,0.6)] z-20 w-[280px]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 1, 0.5, 1] }}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+            >
+              <div className="flex gap-1 text-brand-400 mb-2">
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} weight="fill" className="w-4 h-4 drop-shadow-[0_0_5px_rgba(76,185,122,0.5)]" />)}
+              </div>
+              <div className="text-3xl font-bold text-white mb-0.5 tracking-tight">4.9/5</div>
+              <div className="text-[14px] text-zinc-400 font-medium">Over 400+ Verified Reviews</div>
+              <div className="mt-4 pt-4 border-t border-white/[0.08] flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-surface-900 shadow-md"></div>
+                  <div className="w-8 h-8 rounded-full bg-zinc-700 border-2 border-surface-900 shadow-md"></div>
+                  <div className="w-8 h-8 rounded-full bg-zinc-600 border-2 border-surface-900 shadow-md"></div>
+                </div>
+                <div className="text-xs text-zinc-300 font-medium">Trusted locally</div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Ambient Background — subtle */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/[0.04] rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/[0.02] rounded-full blur-[120px]" />
+      {/* Ambient Deep Glows */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] bg-brand-500/10 rounded-full blur-[150px] mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-[40%] -left-[15%] w-[600px] h-[600px] bg-brand-600/10 rounded-full blur-[150px] mix-blend-screen animate-pulse" style={{ animationDuration: '10s' }} />
       </div>
+      
+      {/* Texture Overlay */}
+      <div className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
     </section>
   );
 }
